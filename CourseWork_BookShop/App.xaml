@@ -1,0 +1,38 @@
+﻿<Application x:Class="CourseWork_BookShop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CourseWork_BookShop"
+             xmlns:viewModel="clr-namespace:CourseWork_BookShop.MVVM.ViewModel"
+             xmlns:view="clr-namespace:CourseWork_BookShop.MVVM.View"
+             StartupUri="User_Sign_MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:PersonalCabinetViewModel}">
+                <view:PersonalCabinetView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:BookInformationViewModel}">
+                <view:BookInformation_View/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:UserSignUpViewModel}">
+                <view:UserSignUpView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:UserSignInViewModel}">
+                <view:UserSignInView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
