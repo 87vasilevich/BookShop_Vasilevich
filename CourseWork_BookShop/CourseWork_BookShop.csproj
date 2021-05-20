@@ -83,9 +83,13 @@
     <Compile Include="MVVM\Model\SQLOrderRepository.cs" />
     <Compile Include="MVVM\Model\SQLUserRepository.cs" />
     <Compile Include="MVVM\Model\Users.cs" />
+    <Compile Include="MVVM\ViewModel\BankCardViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UserSignInViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UserSignUpViewModel.cs" />
     <Compile Include="MVVM\ViewModel\U_Sign_MainViewModel.cs" />
+    <Compile Include="MVVM\View\BankCardView.xaml.cs">
+      <DependentUpon>BankCardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\UserSignInView.xaml.cs">
       <DependentUpon>UserSignInView.xaml</DependentUpon>
     </Compile>
@@ -109,6 +113,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\BankCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\BookInformation_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -17,7 +17,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         private IRepository<Users> users_db = new SQLUserRepository();
         private IRepository<Bank_Cards> card_db = new SQLCardRepository();
 
-#region Создание пользователя
+#region Для создания пользователя
         //Переменные для регистрации
         public string _password;
         public string _password_chek;
@@ -185,14 +185,17 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
             User_sign_upCommand = new RelayCommand(o =>
             {
-                
+                //Добавление в Users
                 users_db.Create(new Users(Password, Name, Surname, Otchestvo, City, Street, Convert.ToInt32(House), Convert.ToInt32(Apartament), Login, Email));
                 users_db.Save();
 
-
+                //Добавление банковской карты
                 int tempID = users_db.GetDataList().Where(x => x.UserLogin == Login).ToList().Last().UserID;
                 card_db.Create(new Bank_Cards(tempID, Card_number, float.Parse(Balance)));
                 card_db.Save();
+
+                //Открытие окна для входа
+                window_main_sign.CurrentView = new UserSignInViewModel(window_main_sign);
             });
         }
     }

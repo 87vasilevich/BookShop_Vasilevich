@@ -13,6 +13,9 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public RelayCommand HomeViewCommand { get; set; }
         public HomeViewModel HomeVM { get; set; }
 
+        public RelayCommand BankCardViewCommand { get; set; }
+        public BankCardViewModel BankCardVM { get; set; }
+
         public RelayCommand PersonalCabinetViewCommand { get; set; }
         public PersonalCabinetViewModel PersonalCabinetVM { get; set; }
 
@@ -28,6 +31,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         {
             HomeVM = new HomeViewModel(this);
             PersonalCabinetVM = new PersonalCabinetViewModel();
+            BankCardVM = new BankCardViewModel();
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o =>
@@ -38,6 +42,11 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             PersonalCabinetViewCommand = new RelayCommand(o =>
             {
                 CurrentView = PersonalCabinetVM;
+            });
+
+            BankCardViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = BankCardVM;
             });
         }
     }
