@@ -105,6 +105,26 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public string Card_number
+        {
+            get { return _card_number; }
+            set
+            {
+                _card_number = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Card_number
+        {
+            get { return _card_number; }
+            set
+            {
+                _card_number = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         public UserSignUpViewModel(U_Sign_MainViewModel window_main_sign)
