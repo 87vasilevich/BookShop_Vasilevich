@@ -27,8 +27,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public string _login;
         public string _email;
         public string _card_number;
-        public string _mm;
-        public string _gg;
         public string _balance;
         public string _city;
         public string _street;
@@ -46,7 +44,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             }
         }
 
-        public string Password_chek
+        public string Password_chek //*
         {
             get { return _password_chek; }
             set
@@ -116,15 +114,59 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             }
         }
 
-        public string Card_number
+        public string Balance
         {
-            get { return _card_number; }
+            get { return _balance; }
             set
             {
-                _card_number = value;
+                _balance = value;
                 OnPropertyChanged();
             }
         }
+
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                _city = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Street
+        {
+            get { return _street; }
+            set
+            {
+                _street = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string House
+        {
+            get { return _house; }
+            set
+            {
+                _house = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Apartament
+        {
+            get { return _apartament; }
+            set
+            {
+                _apartament = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        //Команда
+        public RelayCommand User_sign_upCommand { get; set; }
         #endregion
 
         public UserSignUpViewModel(U_Sign_MainViewModel window_main_sign)
@@ -140,6 +182,18 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                 window_main_sign.CurrentView = new UserSignUpViewModel(window_main_sign);
             }
             );
+
+            User_sign_upCommand = new RelayCommand(o =>
+            {
+                
+                users_db.Create(new Users(Password, Name, Surname, Otchestvo, City, Street, Convert.ToInt32(House), Convert.ToInt32(Apartament), Login, Email));
+                users_db.Save();
+
+
+                int tempID = users_db.GetDataList().Where(x => x.UserLogin == Login).ToList().Last().UserID;
+                card_db.Create(new Bank_Cards(tempID, Card_number, float.Parse(Balance)));
+                card_db.Save();
+            });
         }
     }
 }

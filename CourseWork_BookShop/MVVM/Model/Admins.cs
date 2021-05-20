@@ -11,7 +11,7 @@ namespace CourseWork_BookShop.MVVM.Model
         [Key]
         public int AdminID { get; set; }
 
-        [StringLength(20)]
+        [StringLength(30)]
         public string AdminLogin { get; set; }
 
         public string AdminPassword { get; set; }

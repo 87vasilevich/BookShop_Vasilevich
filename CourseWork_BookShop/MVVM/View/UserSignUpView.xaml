@@ -23,46 +23,40 @@
                 </Grid>
 
                 <Grid>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300"/>
-                    <TextBox materialDesign:HintAssist.Hint="Введите ваше имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300" Text="{Binding Login}"/>
+                    <TextBox materialDesign:HintAssist.Hint="Введите ваше имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300" Text="{Binding Name}"/>
                 </Grid>
 
                 <Grid>
-                    <PasswordBox materialDesign:HintAssist.Hint="Ведите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300"/>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите вашу фамилию" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300" Text="{Binding Password}"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите вашу фамилию" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300" Text="{Binding Surname}"/>
                 </Grid>
 
                 <Grid>
-                    <PasswordBox materialDesign:HintAssist.Hint="Повторите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300"/>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите ваше отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300"/>
+                    <TextBox materialDesign:HintAssist.Hint="Повторите пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300" Text="{Binding Password_chek}"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите ваше отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300" Text="{Binding Otchestvo}"/>
                 </Grid>
 
                 <Grid>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите ваш Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300"/>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите название вашего города" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите ваш Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300" Text="{Binding Email}"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите название вашего города" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300" Text="{Binding City}"/>
                 </Grid>
 
                 <Grid>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите номер банковской карты" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300"/>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите номер вашей улицы" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите номер банковской карты" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300" Text="{Binding Card_number}"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите название вашей улицы" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300" Text="{Binding Street}"/>
                 </Grid>
 
                 <Grid>
-
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Width="38" materialDesign:HintAssist.Hint="ММ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Foreground="Black"/>
-                        <TextBlock FontSize="14" Margin="7 17 7 0" FontFamily="Verdana" Foreground="Black" Text="/"/>
-                        <TextBox Width="38" materialDesign:HintAssist.Hint="ГГ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Foreground="Black"/>
-                    </StackPanel>
-                    <TextBox materialDesign:HintAssist.Hint="Введите номер вашего дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300"/>
+                    <TextBox materialDesign:HintAssist.Hint="Введите номер вашего дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300" Text="{Binding House}"/>
                 </Grid>
 
                 <Grid>
-                    <TextBox materialDesign:HintAssist.Hint="Укажите баланс вашей карты (в долларах $)" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300"/>
-                    <TextBox materialDesign:HintAssist.Hint="Введите номер вашей квартиры" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300"/>
+                    <TextBox materialDesign:HintAssist.Hint="Укажите баланс вашей карты (в долларах $)" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300" Text="{Binding Balance}"/>
+                    <TextBox materialDesign:HintAssist.Hint="Введите номер вашей квартиры" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300" Text="{Binding Apartament}"/>
                 </Grid>
 
-                <Button Content="Завершить регистрацию" Margin="0 20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontSize="20" FontFamily="Verdana" Click="Button_Click_3" />
+                <Button Content="Завершить регистрацию" Margin="0 20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontSize="20" FontFamily="Verdana" Command="{Binding User_sign_upCommand}"/>
             </StackPanel>
         </Border>
     </Grid>

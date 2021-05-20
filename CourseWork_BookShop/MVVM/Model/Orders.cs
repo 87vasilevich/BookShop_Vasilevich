@@ -19,11 +19,9 @@ namespace CourseWork_BookShop.MVVM.Model
 
         public int? Order_UserID { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? OrderDateStart { get; set; }
+        public string OrderDateStart { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? OrderDateEnd { get; set; }
+        public string OrderDateEnd { get; set; }
 
         public virtual Users Users { get; set; }
     }

@@ -13,13 +13,10 @@ namespace CourseWork_BookShop.MVVM.Model
 
         public string BookName { get; set; }
 
-        [StringLength(20)]
         public string AuthorName { get; set; }
 
-        [StringLength(30)]
         public string AuthorSurame { get; set; }
 
-        [StringLength(30)]
         public string AuthorOtchestevo { get; set; }
 
         public string BookDescription { get; set; }

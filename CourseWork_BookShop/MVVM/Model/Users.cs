@@ -16,29 +16,42 @@ namespace CourseWork_BookShop.MVVM.Model
             Orders = new HashSet<Orders>();
         }
 
+        public Users(string _Password, string _Name, string _Surname, string _Otchestvo, string _City, string _Street, int _House, int _Apartament, string _Login, string _Email)
+        {
+            Bank_Cards = new HashSet<Bank_Cards>();
+            Basket = new HashSet<Basket>();
+            Orders = new HashSet<Orders>();
+
+            this.UserPassword = _Password;
+            this.UserName = _Name;
+            this.UserSurname = _Surname;
+            this.UserOtchestvo = _Otchestvo;
+            this.UserCity = _City;
+            this.UserStreet = _Street;
+            this.UserHouse_number = _House;
+            this.UserApartament_number = _Apartament;
+            this.UserLogin = _Login;
+            this.UserEmail = _Email;
+        }
+
         [Key]
         public int UserID { get; set; }
 
-        [StringLength(20)]
         public string UserName { get; set; }
 
-        [StringLength(30)]
         public string UserSurname { get; set; }
 
-        [StringLength(30)]
         public string UserOtchestvo { get; set; }
 
-        [StringLength(20)]
+        [StringLength(30)]
         public string UserLogin { get; set; }
 
         public string UserPassword { get; set; }
 
         public string UserEmail { get; set; }
 
-        [StringLength(20)]
         public string UserCity { get; set; }
 
-        [StringLength(50)]
         public string UserStreet { get; set; }
 
         public int? UserHouse_number { get; set; }
