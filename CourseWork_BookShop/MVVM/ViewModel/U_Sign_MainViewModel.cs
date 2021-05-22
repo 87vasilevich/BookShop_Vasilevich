@@ -9,6 +9,8 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 {
     class U_Sign_MainViewModel : ObservableObject
     {
+        public Action CloseAction { get; set; }
+
         public RelayCommand UserSignINViewCommand { get; set; } //Вход
         public UserSignInViewModel UserSignINVM { get; set; }
 

@@ -27,10 +27,10 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public MainViewModel()
+        public MainViewModel(int _userID)
         {
             HomeVM = new HomeViewModel(this);
-            PersonalCabinetVM = new PersonalCabinetViewModel();
+            PersonalCabinetVM = new PersonalCabinetViewModel(this, _userID);
             BankCardVM = new BankCardViewModel();
             CurrentView = HomeVM;
 

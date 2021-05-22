@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseWork_BookShop.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,14 @@ namespace CourseWork_BookShop
         public User_Sign_MainWindow()
         {
             InitializeComponent();
+
+            U_Sign_MainViewModel sign_MainViewModel = new U_Sign_MainViewModel();
+            this.DataContext = sign_MainViewModel;
+
+            if(sign_MainViewModel.CloseAction==null)
+            {
+                sign_MainViewModel.CloseAction = new Action(this.Close);
+            }
         }
     }
 }

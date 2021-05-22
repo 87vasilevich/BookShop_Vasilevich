@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseWork_BookShop.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,18 @@ namespace CourseWork_BookShop
         public MainWindow()
         {
             InitializeComponent();
+            
         }
+        public MainWindow(int _userID) //Для корректного открытия окон после входа пользователя
+        {
+            InitializeComponent();
+
+            MainViewModel mainViewModel = new MainViewModel(_userID);
+            this.DataContext = mainViewModel;
+        }
+
+
+
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonOpenMenu.Visibility = Visibility.Collapsed;

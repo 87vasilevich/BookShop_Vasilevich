@@ -36,10 +36,7 @@
         </EventTrigger>
     </Window.Triggers>
 
-    <Window.DataContext>
-        <viewModel:MainViewModel/>
-        
-    </Window.DataContext>
+    
     
     <Grid>
         <Grid Height="70" VerticalAlignment="Top" Background="#FF607D8B">

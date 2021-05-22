@@ -21,10 +21,10 @@
                     <Button HorizontalAlignment="Right" Content="Вход" FontSize="20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" Command="{Binding Go_sign_in_again}"></Button>
                 </Grid>
 
-                <TextBox materialDesign:HintAssist.Hint="Ведите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana"/>
-                <PasswordBox materialDesign:HintAssist.Hint="Ведите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana"/>
+                <TextBox materialDesign:HintAssist.Hint="Ведите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Text="{Binding Login}"/>
+                <TextBox materialDesign:HintAssist.Hint="Ведите пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Text="{Binding Email}"/>
 
-                <Button Content="Войти" Margin="0 20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontSize="20" Click="Button_Click_1" FontFamily="Verdana"/>
+                <Button Content="Войти" Margin="0 20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontSize="20" Command="{Binding UserSignInSuccess}" FontFamily="Verdana"/>
             </StackPanel>
         </Border>
     </Grid>

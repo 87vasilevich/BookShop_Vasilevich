@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:CourseWork_BookShop"
              xmlns:viewModel="clr-namespace:CourseWork_BookShop.MVVM.ViewModel"
              xmlns:view="clr-namespace:CourseWork_BookShop.MVVM.View"
-             StartupUri="MainWindow.xaml">
+             StartupUri="User_Sign_MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
