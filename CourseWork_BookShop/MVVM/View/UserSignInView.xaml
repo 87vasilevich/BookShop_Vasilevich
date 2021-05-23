@@ -22,7 +22,7 @@
                 </Grid>
 
                 <TextBox materialDesign:HintAssist.Hint="Ведите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Text="{Binding Login}"/>
-                <TextBox materialDesign:HintAssist.Hint="Ведите пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Text="{Binding Email}"/>
+                <TextBox materialDesign:HintAssist.Hint="Ведите пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Text="{Binding Password}"/>
 
                 <Button Content="Войти" Margin="0 20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontSize="20" Command="{Binding UserSignInSuccess}" FontFamily="Verdana"/>
             </StackPanel>

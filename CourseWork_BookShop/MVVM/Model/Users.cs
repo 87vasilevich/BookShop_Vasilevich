@@ -16,6 +16,16 @@ namespace CourseWork_BookShop.MVVM.Model
             Orders = new HashSet<Orders>();
         }
 
+        public Users(string _Password, string _Login)
+        {
+            Bank_Cards = new HashSet<Bank_Cards>();
+            Basket = new HashSet<Basket>();
+            Orders = new HashSet<Orders>();
+
+            this.UserPassword = _Password;
+            this.UserLogin = _Login;
+        }
+
         public Users(string _Password, string _Name, string _Surname, string _Otchestvo, string _City, string _Street, int _House, int _Apartament, string _Login, string _Email)
         {
             Bank_Cards = new HashSet<Bank_Cards>();
