@@ -19,11 +19,16 @@ namespace CourseWork_BookShop.MVVM.Model
 
         public virtual Users Users { get; set; }
 
-        public Bank_Cards(int _tempID, string _Card_number, float _Balance)
+        public Bank_Cards(int _tempID, string _Card_number, double _Balance)
         {
             this.Card_UserID = _tempID;
             this.CardNumber = _Card_number;
             this.CardBalance = _Balance;
+        }
+
+        public Bank_Cards()
+        {
+
         }
     }
 }

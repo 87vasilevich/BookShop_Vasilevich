@@ -18,5 +18,17 @@ namespace CourseWork_BookShop.MVVM.Model
         public int? BasketBookAmount { get; set; }
 
         public virtual Users Users { get; set; }
+
+        public Basket()
+        {
+
+        }
+
+        public Basket(int _userID, int _bookID, int _bookamount)
+        {
+            this.Basket_UserID = _userID;
+            this.Basket_BookID = _bookID;
+            this.BasketBookAmount = _bookamount;
+        }
     }
 }

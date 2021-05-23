@@ -280,7 +280,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
                 Name!=null && Name!="" && Surname!=null && Surname!="" && Otchestvo!=null && Otchestvo!="" &&
                 City!= null && City !="" && Street!=null && Street!="" && House!=null && House!="" && Apartament!=null &&
-                Apartament!="" && Email!=null && Email!="")
+                Apartament!="" && Email!=null && Email!="") //------------------Квартиру можно не писать!!!!
                 {
                     message = MessageBox.Show("Вы уверены?", "Изменение персональной информации", MessageBoxButton.YesNo);
                     if (message == MessageBoxResult.Yes)

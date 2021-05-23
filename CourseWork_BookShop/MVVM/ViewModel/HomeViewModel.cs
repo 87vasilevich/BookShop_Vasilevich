@@ -12,18 +12,24 @@ namespace CourseWork_BookShop.MVVM.ViewModel
     class HomeViewModel : ObservableObject
     {
         #region Для BookInformation
+        //Переменные
         public MainViewModel mainVM;
         private Books _selectedBook;
+        public int t_userID;
+
+        //Свойство
         public BookInformationViewModel BookInfoVM { get; set; }
 
+        //Метод
         private void OnBookSelected(Books selectedBook)
         {
-            BookInfoVM = new BookInformationViewModel(this);
+            BookInfoVM = new BookInformationViewModel(this, t_userID);
 
             BookInfoVM.SetBook(SelectedBook);
             mainVM.CurrentView = BookInfoVM;
         }
 
+        //Свойство
         public Books SelectedBook
         {
             get { return _selectedBook; }
@@ -35,6 +41,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         }
         #endregion
 
+        //---------------------------------------------------------
         private IRepository<Books> db = new SQLBookRepository();
         public ObservableCollection<Books> allBooks { get; set; }
         public ObservableCollection<Books> AllBooks
@@ -44,8 +51,10 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+        //---------------------------------------------------------
 
 
+        //---------------------------------------------------------
         private string choice;
         public string Choice
         {
@@ -58,10 +67,12 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         }
 
         public RelayCommand Sort_books { get; set; } //Для сортировки
-        public HomeViewModel(MainViewModel mainVM)
+
+        public HomeViewModel(MainViewModel mainVM, int _userID) //Конструктор
         {
             this.mainVM = mainVM;
             AllBooks = Get_allBooks();
+            t_userID = _userID;
 
             Sort_books = new RelayCommand(o =>
             {
@@ -98,10 +109,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             });
         }
 
-
-        
-
-
+        #region Методы
         private ObservableCollection<Books> Get_allBooks() //Вывод всех книг
         {
             return new ObservableCollection<Books>(db.GetDataList().ToList());
@@ -136,5 +144,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         {
             return new ObservableCollection<Books>(db.GetDataList().OrderByDescending(Book => Book.AuthorSurame).ThenBy(Book => Book.AuthorName).ToList());
         }
+        #endregion
+        //---------------------------------------------------------
     }
 }

@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CourseWork_BookShop.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для BankCardView.xaml
+    /// Логика взаимодействия для BasketView.xaml
     /// </summary>
-    public partial class BankCardView : UserControl
+    public partial class BasketView : Window
     {
-        public BankCardView()
+        public BasketView()
         {
             InitializeComponent();
         }

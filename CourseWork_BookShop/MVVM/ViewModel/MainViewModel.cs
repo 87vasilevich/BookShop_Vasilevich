@@ -11,13 +11,10 @@ namespace CourseWork_BookShop.MVVM.ViewModel
     class MainViewModel : ObservableObject
     {
         public RelayCommand HomeViewCommand { get; set; }
-        public HomeViewModel HomeVM { get; set; }
 
         public RelayCommand BankCardViewCommand { get; set; }
-        public BankCardViewModel BankCardVM { get; set; }
 
         public RelayCommand PersonalCabinetViewCommand { get; set; }
-        public PersonalCabinetViewModel PersonalCabinetVM { get; set; }
 
         private object _currentView;
 
@@ -29,24 +26,21 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
         public MainViewModel(int _userID)
         {
-            HomeVM = new HomeViewModel(this);
-            PersonalCabinetVM = new PersonalCabinetViewModel(this, _userID);
-            BankCardVM = new BankCardViewModel();
-            CurrentView = HomeVM;
+            CurrentView = new HomeViewModel(this, _userID);
 
             HomeViewCommand = new RelayCommand(o =>
             {
-                CurrentView = HomeVM;
+                CurrentView = new HomeViewModel(this, _userID);
             });
 
             PersonalCabinetViewCommand = new RelayCommand(o =>
             {
-                CurrentView = PersonalCabinetVM;
+                CurrentView = new PersonalCabinetViewModel(this, _userID);
             });
 
             BankCardViewCommand = new RelayCommand(o =>
             {
-                CurrentView = BankCardVM;
+                CurrentView = new BankCardViewModel(this, _userID);
             });
         }
     }
