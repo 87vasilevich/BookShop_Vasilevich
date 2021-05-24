@@ -48,13 +48,10 @@
                 </Grid>
 
                 <Grid>
+                    <TextBox materialDesign:HintAssist.Hint="Введите номер вашей квартиры" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300" Text="{Binding Apartament}"/>
                     <TextBox materialDesign:HintAssist.Hint="Введите номер вашего дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300" Text="{Binding House}"/>
                 </Grid>
 
-                <Grid>
-                    <TextBox materialDesign:HintAssist.Hint="Укажите баланс вашей карты (в долларах $)" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300" Text="{Binding Balance}"/>
-                    <TextBox materialDesign:HintAssist.Hint="Введите номер вашей квартиры" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300" Text="{Binding Apartament}"/>
-                </Grid>
 
                 <Button Content="Завершить регистрацию" Margin="0 20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontSize="20" FontFamily="Verdana" Command="{Binding User_sign_upCommand}"/>
             </StackPanel>

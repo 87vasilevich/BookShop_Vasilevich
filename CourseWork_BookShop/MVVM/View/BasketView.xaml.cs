@@ -17,7 +17,7 @@ namespace CourseWork_BookShop.MVVM.View
     /// <summary>
     /// Логика взаимодействия для BasketView.xaml
     /// </summary>
-    public partial class BasketView : Window
+    public partial class BasketView : UserControl
     {
         public BasketView()
         {

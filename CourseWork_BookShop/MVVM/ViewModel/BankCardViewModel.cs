@@ -19,7 +19,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public Bank_Cards cur_card;
         public string _card_number;
         public string _balance;
-        //public string _userid;
 
         //Свойства
         public Bank_Cards CurrentCard
@@ -53,7 +52,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         }
 
         //Команда
-        public RelayCommand ChangeBalance { get; set; }
+        //public RelayCommand ChangeBalance { get; set; }
         #endregion
 
         public BankCardViewModel (MainViewModel mainVM, int _userID)
@@ -65,28 +64,28 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             Card_number = CurrentCard.CardNumber;
             Balance = CurrentCard.CardBalance.ToString();
 
-            ChangeBalance = new RelayCommand(o =>
-            {
-                MessageBoxResult message;
+            //ChangeBalance = new RelayCommand(o =>
+            //{
+            //    MessageBoxResult message;
 
-                if (Balance!= null && Balance!="")
-                {
-                    message = MessageBox.Show("Вы уверены?", "Изменение баланса", MessageBoxButton.YesNo);
-                    if (message == MessageBoxResult.Yes)
-                    {
-                        CurrentCard.CardBalance = float.Parse(Balance);
-                        cards_db.Update(CurrentCard);
-                        cards_db.Save();
+            //    if (Balance!= null && Balance!="")
+            //    {
+            //        message = MessageBox.Show("Вы уверены?", "Изменение баланса", MessageBoxButton.YesNo);
+            //        if (message == MessageBoxResult.Yes)
+            //        {
+            //            CurrentCard.CardBalance = float.Parse(Balance);
+            //            cards_db.Update(CurrentCard);
+            //            cards_db.Save();
 
-                        MessageBox.Show("Баланс успешно изменён!", "Изменение баланса");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("ОШИБКА!\nПроверьте введённые данные.", "Изменение баланса");
-                }
-            }
-            );
+            //            MessageBox.Show("Баланс успешно изменён!", "Изменение баланса");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("ОШИБКА!\nПроверьте введённые данные.", "Изменение баланса");
+            //    }
+            //}
+            //);
         }
     }
 }

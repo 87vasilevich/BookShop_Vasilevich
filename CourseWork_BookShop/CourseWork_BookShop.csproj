@@ -73,11 +73,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MVVM\Model\Admins.cs" />
     <Compile Include="MVVM\Model\ApplicationContext.cs" />
     <Compile Include="MVVM\Model\Bank_Cards.cs" />
     <Compile Include="MVVM\Model\Basket.cs" />
     <Compile Include="MVVM\Model\Books.cs" />
+    <Compile Include="MVVM\Model\Notifications.cs" />
     <Compile Include="MVVM\Model\Orders.cs" />
     <Compile Include="MVVM\Model\SQLBasketRepository.cs" />
     <Compile Include="MVVM\Model\SQLCardRepository.cs" />

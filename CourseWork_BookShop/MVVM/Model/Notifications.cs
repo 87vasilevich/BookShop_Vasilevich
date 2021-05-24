@@ -6,14 +6,13 @@ namespace CourseWork_BookShop.MVVM.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Admins
+    public partial class Notifications
     {
         [Key]
-        public int AdminID { get; set; }
+        public int NotificationID { get; set; }
 
-        [StringLength(30)]
-        public string AdminLogin { get; set; }
+        public int? Notification_OrderID { get; set; }
 
-        public string AdminPassword { get; set; }
+        public string NotificationText { get; set; }
     }
 }

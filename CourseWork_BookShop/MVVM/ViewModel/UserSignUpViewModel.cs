@@ -190,6 +190,9 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                 users_db.Save();
 
                 //Добавление банковской карты
+                Random rnd = new Random();
+                Balance = (rnd.Next(1000000, 3000000)).ToString(); //Рандомный баланс
+
                 int tempID = users_db.GetDataList().Where(x => x.UserLogin == Login).ToList().Last().UserID;
                 card_db.Create(new Bank_Cards(tempID, Card_number, Convert.ToDouble(Balance)));
                 card_db.Save();

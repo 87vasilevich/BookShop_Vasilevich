@@ -20,6 +20,10 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public string b_amount;
         public int _bookid;
         public string totalamount; //узнать, сколько на складе
+        public double baskettotalsum;
+        public string aname;
+        public string asurname;
+        public string bname;
         public Books cur_book;
 
         //Свойства
@@ -29,6 +33,36 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             set
             {
                 _bookid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string BName
+        {
+            get { return bname; }
+            set
+            {
+                bname = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string AName
+        {
+            get { return aname; }
+            set
+            {
+                aname = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string ASurname
+        {
+            get { return asurname; }
+            set
+            {
+                asurname = value;
                 OnPropertyChanged();
             }
         }
@@ -53,6 +87,16 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             }
         }
 
+        public double BasketTotalSum
+        {
+            get { return baskettotalsum; }
+            set
+            {
+                baskettotalsum = value;
+                OnPropertyChanged();
+            }
+        }
+
         public Books CurrentBook
         {
             get { return cur_book; }
@@ -65,16 +109,21 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
         //Команда
         public RelayCommand AddToBasket { get; set; }
+
         #endregion
 
         public Books SelectedBook { get; set; }
         public void SetBook(Books selectedBook)
         {
             this.SelectedBook = selectedBook;
-
+            CurrentBook = this.SelectedBook; //находим в бд текущую книгу
             //Для корзины
             BookID = this.SelectedBook.BookID;
             TotalAmount = this.SelectedBook.BookAmount.ToString();
+
+            AName = this.SelectedBook.AuthorName;
+            ASurname = this.SelectedBook.AuthorSurame;
+            BName = this.SelectedBook.BookName;
         }
 
         public RelayCommand GoBack_button { get; set; }
@@ -89,18 +138,19 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             AddToBasket = new RelayCommand(o =>
             {
                 if((Convert.ToInt32(BAmount) <= Convert.ToInt32(TotalAmount)) && BAmount!="" && BAmount!=null && (Convert.ToInt32(BAmount)>0))
-                {
-                    CurrentBook = book_db.GetElement(BookID); //находим в бд текущую книгу
+                { 
                     CurrentBook.BookAmount = (Convert.ToInt32(TotalAmount) - Convert.ToInt32(BAmount)); //изменяем кол-во на складе
                     book_db.Update(CurrentBook); //обновляем бд
                     book_db.Save();
 
-                    basket_db.Create(new Basket(_userID, BookID, Convert.ToInt32(BAmount))); //добавляем в корзину
+                    BasketTotalSum = Convert.ToDouble(Convert.ToDouble(BAmount) * CurrentBook.BookPrice_Single);
+                    basket_db.Create(new Basket(_userID, BookID, Convert.ToInt32(BAmount), BasketTotalSum, AName, ASurname, BName)); //добавляем в корзину
                     basket_db.Save();
 
                     MessageBox.Show("Добавлено в корзину!");
 
                     BAmount = "";
+                    CurrentBook = book_db.GetElement(BookID); //для обновления
                 }
                 else
                 {

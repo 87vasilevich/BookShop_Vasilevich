@@ -12,10 +12,10 @@ namespace CourseWork_BookShop.MVVM.Model
         {
         }
 
-        public virtual DbSet<Admins> Admins { get; set; }
         public virtual DbSet<Bank_Cards> Bank_Cards { get; set; }
         public virtual DbSet<Basket> Basket { get; set; }
         public virtual DbSet<Books> Books { get; set; }
+        public virtual DbSet<Notifications> Notifications { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 

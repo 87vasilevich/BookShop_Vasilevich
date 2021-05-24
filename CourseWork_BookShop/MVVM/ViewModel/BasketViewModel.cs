@@ -11,6 +11,135 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 {
     class BasketViewModel : ObservableObject
     {
+        #region Оформление заказа
+        private IRepository<Orders> order_db = new SQLOrderRepository();
+        private IRepository<Bank_Cards> card_db = new SQLCardRepository();
+        private IRepository<Users> users_db = new SQLUserRepository();
+
+        //Переменные
+        public string b_amount;
+        public int _bookid;
+        public double ordertotalsum;
+        public string aname;
+        public string asurname;
+        public string bname;
+        public string datestart;
+        public string dateend;
+        public double _finalsum;
+        public Bank_Cards cur_card;
+
+        DateTime date_end;
+        Random rnd = new Random();
+
+        //Свойства
+        public Bank_Cards CurrentCard
+        {
+            get { return cur_card; }
+            set
+            {
+                cur_card = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double FinalSum
+        {
+            get { return _finalsum; }
+            set
+            {
+                _finalsum = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DateEnd
+        {
+            get { return dateend; }
+            set
+            {
+                dateend = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DateStart
+        {
+            get { return datestart; }
+            set
+            {
+                datestart = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int BookID
+        {
+            get { return _bookid; }
+            set
+            {
+                _bookid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string BName
+        {
+            get { return bname; }
+            set
+            {
+                bname = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string AName
+        {
+            get { return aname; }
+            set
+            {
+                aname = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string ASurname
+        {
+            get { return asurname; }
+            set
+            {
+                asurname = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string BAmount
+        {
+            get { return b_amount; }
+            set
+            {
+                b_amount = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double OrderTotalSum
+        {
+            get { return ordertotalsum; }
+            set
+            {
+                ordertotalsum = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //Команда
+        public RelayCommand AddOrder { get; set; }
+        #endregion
+
+        public RelayCommand DeleteFromBasket { get; set; }
+        
+
+
         //---------------------------------------------------------
         private IRepository<Basket> basket_db = new SQLBasketRepository();
         public ObservableCollection<Basket> allfromBasket { get; set; }
@@ -25,10 +154,143 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         }
         //---------------------------------------------------------
 
+        //---------------------------------------------------------
+        //для корзины
+        public Basket currentbasket;
+        public Basket CurentBasket
+        {
+            get { return currentbasket; }
+            set
+            {
+                currentbasket = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string isempty;
+        public string IsBasketEmpty
+        {
+            get { return isempty; }
+            set
+            {
+                isempty = value;
+                OnPropertyChanged();
+            }
+        }
+        //---------------------------------------------------------
+
         public BasketViewModel(MainViewModel mainVM, int _userID)
         {
+            //------------------------------------------
             int temp_userID = _userID;
             AllfromBasket = Get_allfromBasket(temp_userID);
+            if(AllfromBasket.Count == 0)
+            {
+                IsBasketEmpty = "Корзина пуста!";
+            }
+            else
+            {
+                IsBasketEmpty = "";
+            }
+
+            //Подсчёт общей суммы заказа
+            FinalSum = 0;
+            foreach (Basket b in AllfromBasket)
+            {
+                //Получаем данные
+                OrderTotalSum = (double)b.BasketTotalSum;
+
+                //Общая сумма заказа
+                FinalSum += OrderTotalSum;
+            }
+            //------------------------------------------
+
+
+
+            DeleteFromBasket = new RelayCommand(o => //----------------очистка всей корзины
+            {
+                foreach(Basket b in AllfromBasket)
+                {
+                    basket_db.Delete(b.BasketID);
+                }
+                basket_db.Save();
+
+                AllfromBasket = Get_allfromBasket(temp_userID);
+                if (AllfromBasket.Count == 0)
+                {
+                    IsBasketEmpty = "Корзина пуста!";
+                }
+
+                //Подсчёт общей суммы заказа
+                FinalSum = 0;
+            });
+
+            AddOrder = new RelayCommand(o => //----------------Оформление заказа
+            {
+                //------------------------------------------
+                DateStart = DateTime.Now.ToString(); //Дата оформления
+
+                //Работаем с датой окончания
+                date_end = DateTime.Now;
+                int days = rnd.Next(1, 3);
+                date_end = date_end.AddDays(days);
+                DateEnd = date_end.ToString();
+
+                //Процесс оформления
+                FinalSum = 0;
+                foreach (Basket b in AllfromBasket) 
+                {
+                    //Получаем данные
+                    BookID = (int)b.Basket_BookID;
+                    BAmount = b.BasketBookAmount.ToString();
+                    AName = b.A_Name;
+                    ASurname = b.A_Surname;
+                    BName = b.B_Name;
+                    OrderTotalSum = (double)b.BasketTotalSum;
+
+                    //Общая сумма заказа
+                    FinalSum += OrderTotalSum;
+
+                    order_db.Create(new Orders(AName, ASurname, BName, DateStart, DateEnd, temp_userID, BookID, OrderTotalSum, Convert.ToInt32(BAmount)));
+                    order_db.Save();
+                }
+
+                //Изменяем баланс карты
+                int temp_cardid = users_db.GetElement(_userID).Bank_Cards.Last().CardID;
+                CurrentCard = card_db.GetElement(temp_cardid);
+                CurrentCard.CardBalance = CurrentCard.CardBalance - FinalSum;
+                card_db.Update(CurrentCard);
+                card_db.Save();
+
+                //очистка корзины
+                foreach (Basket b in AllfromBasket)
+                {
+                    basket_db.Delete(b.BasketID);
+                }
+                basket_db.Save();
+                //------------------------------------------
+
+
+                //------------------------------------------
+                //Обновление корзины
+                AllfromBasket = Get_allfromBasket(temp_userID);
+                if (AllfromBasket.Count == 0)
+                {
+                    IsBasketEmpty = "Корзина пуста!";
+                }
+
+                //Подсчёт общей суммы заказа
+                FinalSum = 0;
+                foreach (Basket b in AllfromBasket)
+                {
+                    //Получаем данные
+                    OrderTotalSum = (double)b.BasketTotalSum;
+
+                    //Общая сумма заказа
+                    FinalSum += OrderTotalSum;
+                }
+                //------------------------------------------
+            });
         }
 
         private ObservableCollection<Basket> Get_allfromBasket(int temp_userID) //Вывод корзины

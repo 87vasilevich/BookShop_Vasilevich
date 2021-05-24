@@ -9,6 +9,31 @@ namespace CourseWork_BookShop.MVVM.Model
     public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+
+        [Key]
+        public int UserID { get; set; }
+
+        public string UserName { get; set; }
+
+        public string UserSurname { get; set; }
+
+        public string UserOtchestvo { get; set; }
+
+        [StringLength(30)]
+        public string UserLogin { get; set; }
+
+        public string UserPassword { get; set; }
+
+        public string UserEmail { get; set; }
+
+        public string UserCity { get; set; }
+
+        public string UserStreet { get; set; }
+
+        public int? UserHouse_number { get; set; }
+
+        public int? UserApartament_number { get; set; }
+
         public Users()
         {
             Bank_Cards = new HashSet<Bank_Cards>();
@@ -43,30 +68,6 @@ namespace CourseWork_BookShop.MVVM.Model
             this.UserLogin = _Login;
             this.UserEmail = _Email;
         }
-
-        [Key]
-        public int UserID { get; set; }
-
-        public string UserName { get; set; }
-
-        public string UserSurname { get; set; }
-
-        public string UserOtchestvo { get; set; }
-
-        [StringLength(30)]
-        public string UserLogin { get; set; }
-
-        public string UserPassword { get; set; }
-
-        public string UserEmail { get; set; }
-
-        public string UserCity { get; set; }
-
-        public string UserStreet { get; set; }
-
-        public int? UserHouse_number { get; set; }
-
-        public int? UserApartament_number { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bank_Cards> Bank_Cards { get; set; }

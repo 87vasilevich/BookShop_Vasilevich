@@ -37,7 +37,7 @@
 
             <StackPanel Orientation="Horizontal" Margin="0 100 0 0">
                 <TextBlock FontFamily="Verdana" FontSize="16">Количество на складе:</TextBlock>
-                <TextBlock FontFamily="Verdana" FontSize="16" Margin="8 0 0 0" Text="{Binding Path=TotalAmount}"></TextBlock>
+                <TextBlock FontFamily="Verdana" FontSize="16" Margin="8 0 0 0" Text="{Binding Path=CurrentBook.BookAmount}"></TextBlock>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 7 0 0">
