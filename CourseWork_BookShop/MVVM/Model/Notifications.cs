@@ -14,5 +14,16 @@ namespace CourseWork_BookShop.MVVM.Model
         public int? Notification_OrderID { get; set; }
 
         public string NotificationText { get; set; }
+
+        public Notifications()
+        {
+
+        }
+
+        public Notifications(int _userid, string _text)
+        {
+            Notification_OrderID = _userid;
+            NotificationText = _text;
+        }
     }
 }

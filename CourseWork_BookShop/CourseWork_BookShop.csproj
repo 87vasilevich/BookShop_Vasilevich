@@ -81,11 +81,13 @@
     <Compile Include="MVVM\Model\Orders.cs" />
     <Compile Include="MVVM\Model\SQLBasketRepository.cs" />
     <Compile Include="MVVM\Model\SQLCardRepository.cs" />
+    <Compile Include="MVVM\Model\SQLNotificationReporitory.cs" />
     <Compile Include="MVVM\Model\SQLOrderRepository.cs" />
     <Compile Include="MVVM\Model\SQLUserRepository.cs" />
     <Compile Include="MVVM\Model\Users.cs" />
     <Compile Include="MVVM\ViewModel\BankCardViewModel.cs" />
     <Compile Include="MVVM\ViewModel\BasketViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\NotificationViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UserSignInViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UserSignUpViewModel.cs" />
     <Compile Include="MVVM\ViewModel\U_Sign_MainViewModel.cs" />
@@ -94,6 +96,9 @@
     </Compile>
     <Compile Include="MVVM\View\BasketView.xaml.cs">
       <DependentUpon>BasketView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\NotificationView.xaml.cs">
+      <DependentUpon>NotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\UserSignInView.xaml.cs">
       <DependentUpon>UserSignInView.xaml</DependentUpon>
@@ -131,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\NotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

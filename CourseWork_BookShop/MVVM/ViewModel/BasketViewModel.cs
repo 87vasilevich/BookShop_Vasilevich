@@ -15,6 +15,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         private IRepository<Orders> order_db = new SQLOrderRepository();
         private IRepository<Bank_Cards> card_db = new SQLCardRepository();
         private IRepository<Users> users_db = new SQLUserRepository();
+        private IRepository<Notifications> notification_db = new SQLNotificationRepository();
 
         //Переменные
         public string b_amount;
@@ -27,6 +28,10 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public string dateend;
         public double _finalsum;
         public Bank_Cards cur_card;
+
+        //Переменные для уведомлений
+        public string _ntext;
+        public int _oid;
 
         DateTime date_end;
         Random rnd = new Random();
@@ -132,9 +137,45 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             }
         }
 
+        //Свойства для уведомления
+        public string NotifText
+        {
+            get { return _ntext; }
+            set
+            {
+                _ntext = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int OID //order id для уведомлений
+        {
+            get { return _oid; }
+            set
+            {
+                _oid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //--------------------------------------------------------- Для уведомлений
+        public ObservableCollection<Orders> allfromOrders { get; set; }
+        public ObservableCollection<Orders> AllfromOrders
+        {
+            get { return allfromOrders; }
+            set
+            {
+                allfromOrders = value;
+                OnPropertyChanged();
+            }
+        }
+        //---------------------------------------------------------
+
+
         //Команда
         public RelayCommand AddOrder { get; set; }
         #endregion
+
 
         public RelayCommand DeleteFromBasket { get; set; }
         
@@ -255,6 +296,18 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                     order_db.Save();
                 }
 
+                //Процесс добавления уведомления
+                AllfromOrders = Get_allfromOrders(DateStart);
+                NotifText = "Заказ:\n";
+                foreach(Orders ord in AllfromOrders)
+                {
+                    NotifText += $"Название: {ord.B_Name} --- Количество: {ord.OrderBookAmount}\n";
+                }
+                NotifText += $"Сумма заказа: {FinalSum}$\n";
+                NotifText += $"Дата оформления заказа: {DateStart}. Дата доставки: {DateEnd}.";
+                notification_db.Create(new Notifications(_userID, NotifText));
+                notification_db.Save();
+
                 //Изменяем баланс карты
                 int temp_cardid = users_db.GetElement(_userID).Bank_Cards.Last().CardID;
                 CurrentCard = card_db.GetElement(temp_cardid);
@@ -296,6 +349,11 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         private ObservableCollection<Basket> Get_allfromBasket(int temp_userID) //Вывод корзины
         {
             return new ObservableCollection<Basket>(basket_db.GetDataList().Where(o => o.Basket_UserID == temp_userID).ToList());
+        }
+
+        private ObservableCollection<Orders> Get_allfromOrders(string _datestart) //Вывод заказов
+        {
+            return new ObservableCollection<Orders>(order_db.GetDataList().Where(t => t.OrderDateStart.ToString() == _datestart).ToList());
         }
     }
 }

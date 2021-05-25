@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="CourseWork_BookShop.MVVM.View.NotificationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CourseWork_BookShop.MVVM.View"
+             mc:Ignorable="d"
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="700.4" d:DesignWidth="1096.8">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" FontSize="30" FontFamily="Verdana" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Уведомления о заказах</TextBlock>
+
+        <ListBox ItemsSource="{Binding AllfromNotifications}" Height="610" Width="804.8"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+
+                    <StackPanel Width="1096.8" Height="100" Orientation="Horizontal">
+                        <ScrollViewer>
+                            <TextBlock FontSize="20" TextWrapping="Wrap"
+                                       Text="{Binding Path=NotificationText}"
+                                       FontFamily="Verdana"/>
+                        </ScrollViewer>
+                    </StackPanel>
+                    
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <!--<Button Command="{Binding DeleteFromBasket}" Margin="146 0 0 22" Grid.Row="1"  Height="32" Width="130" Content="Назад" FontSize="20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" VerticalAlignment="Bottom" ></Button>-->
+    </Grid>
+</UserControl>

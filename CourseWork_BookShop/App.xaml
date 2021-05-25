@@ -41,6 +41,10 @@
             <DataTemplate DataType="{x:Type viewModel:BasketViewModel}">
                 <view:BasketView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:NotificationViewModel}">
+                <view:NotificationView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

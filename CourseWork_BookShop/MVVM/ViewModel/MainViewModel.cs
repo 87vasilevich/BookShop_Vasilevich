@@ -16,6 +16,8 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
         public RelayCommand BasketViewCommand { get; set; }
 
+        public RelayCommand NotificationViewCommand { get; set; }
+
         public RelayCommand PersonalCabinetViewCommand { get; set; }
 
         private object _currentView;
@@ -48,6 +50,11 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             BasketViewCommand = new RelayCommand(o =>
             {
                 CurrentView = new BasketViewModel(this, _userID);
+            });
+
+            NotificationViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = new NotificationViewModel(this, _userID);
             });
         }
     }
