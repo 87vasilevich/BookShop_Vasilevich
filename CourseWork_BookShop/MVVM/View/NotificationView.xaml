@@ -38,7 +38,5 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-
-        <!--<Button Command="{Binding DeleteFromBasket}" Margin="146 0 0 22" Grid.Row="1"  Height="32" Width="130" Content="Назад" FontSize="20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" VerticalAlignment="Bottom" ></Button>-->
     </Grid>
 </UserControl>

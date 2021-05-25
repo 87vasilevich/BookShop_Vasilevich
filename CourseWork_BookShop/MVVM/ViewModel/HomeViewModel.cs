@@ -11,6 +11,47 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 {
     class HomeViewModel : ObservableObject
     {
+        #region Для поиска
+        //Для выбора жанра
+        private string choice_genre;
+        public string ChoiceGenre
+        {
+            get { return choice_genre; }
+            set
+            {
+                choice_genre = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //Для названия книги
+        public string _bookn;
+        public string BookName
+        {
+            get { return _bookn; }
+            set
+            {
+                _bookn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //Для ФИО автора
+        public string _afio;
+        public string AuthorFIO
+        {
+            get { return _afio; }
+            set
+            {
+                _afio = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //Команда
+        public RelayCommand Search_book { get; set; }
+        #endregion
+
         #region Для BookInformation
         //Переменные
         public MainViewModel mainVM;
@@ -55,6 +96,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
 
         //---------------------------------------------------------
+        //Для сортировки
         private string choice;
         public string Choice
         {
@@ -107,6 +149,14 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         break;
                 }
             });
+
+            //Search_book = new RelayCommand(o =>
+            //{
+            //    if((BookName != "") && (BookName != null))
+            //    {
+            //        if(ChoiceGenre == "")
+            //    }
+            //});
         }
 
         #region Методы

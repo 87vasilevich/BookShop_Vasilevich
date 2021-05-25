@@ -10,6 +10,8 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
+        public Action CloseAction { get; set; }
+
         public RelayCommand HomeViewCommand { get; set; }
 
         public RelayCommand BankCardViewCommand { get; set; }
@@ -17,6 +19,8 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public RelayCommand BasketViewCommand { get; set; }
 
         public RelayCommand NotificationViewCommand { get; set; }
+
+        public RelayCommand ExitViewCommand { get; set; }
 
         public RelayCommand PersonalCabinetViewCommand { get; set; }
 
@@ -55,6 +59,14 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             NotificationViewCommand = new RelayCommand(o =>
             {
                 CurrentView = new NotificationViewModel(this, _userID);
+            });
+
+            ExitViewCommand = new RelayCommand(o =>
+            {
+                User_Sign_MainWindow user_Sign_Main = new User_Sign_MainWindow();
+                user_Sign_Main.Show();
+
+                CloseAction();
             });
         }
     }

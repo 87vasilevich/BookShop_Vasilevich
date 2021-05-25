@@ -32,6 +32,11 @@ namespace CourseWork_BookShop
 
             MainViewModel mainViewModel = new MainViewModel(_userID);
             this.DataContext = mainViewModel;
+
+            if (mainViewModel.CloseAction == null)
+            {
+                mainViewModel.CloseAction = new Action(this.Close);
+            }
         }
 
 

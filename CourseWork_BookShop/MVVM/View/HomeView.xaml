@@ -26,13 +26,15 @@
         <TextBlock Height="20" Grid.Row="0" FontSize="16" FontFamily="Verdana" TextDecorations="{x:Null}" FontWeight="Bold" Margin="145,68,621.8,112">Дополнительные настройки</TextBlock>
 
         <ComboBox Grid.Row="0"
-  materialDesign:HintAssist.Hint="Жанр" Margin="145,102,851.8,76" Height="22">
+        SelectedItem="1" Margin="145,102,851.8,76" Height="22">
             <ComboBoxItem
-    Content="Android" />
+    Content="Жанр" />
             <ComboBoxItem
-    Content="iOS" />
+    Content="Фэнтези" />
             <ComboBoxItem
-    Content="Linux" />
+    Content="Русская классика" />
+            <ComboBoxItem
+    Content="Приключения" />
             <ComboBoxItem
     Content="Windows" />
         </ComboBox>
@@ -83,8 +85,8 @@
 
 
         <TextBlock Height="20" Grid.Row="0" FontSize="16" FontFamily="Verdana" TextDecorations="{x:Null}" FontWeight="Bold" Margin="802,68,144.8,112" Width="150">Сортировать по</TextBlock>
-        <ComboBox Grid.Row="0" Text="{Binding Choice}"
-            materialDesign:HintAssist.Hint="умолчанию" Margin="806,102,144.8,76" Height="22">
+        <ComboBox Grid.Row="0" Text="{Binding Choice}" SelectedItem="1"
+             Margin="806,102,144.8,76" Height="22">
             <ComboBoxItem
                 Content="умолчанию"/>
             <ComboBoxItem
