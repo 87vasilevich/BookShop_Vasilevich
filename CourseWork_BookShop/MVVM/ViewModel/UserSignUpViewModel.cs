@@ -180,26 +180,30 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                 switch (columnName)
                 {
                     case "Login":
-                        if (Login.Length == 0 || Login == "")
+                        if (Login.Length == 0)
                         {
                             error = "Введите логин!";
                         }
                         else
-                            error = String.Empty;
-                        if (Login.Length < 6 && Login.Length > 10)
                         {
-                            error = "Длина логина должна быть от 6 до 10 символов!";
-                        }
-                        else
                             error = String.Empty;
-                        if (Login.Contains(" ") || Login.Contains(",") || Login.Contains(".") || Login.Contains(":") ||
-                            Login.Contains("<") || Login.Contains(">") || Login.Contains("?") || Login.Contains("!") ||
-                            Login.Contains("@") || Login.Contains("\"") || Login.Contains("\'"))
-                        {
-                            error = "Недопустимый символ в логине!";
+                            if (!IsValidLogin(Login))
+                            {
+                                error = "Некорректный логин! Разрешено: буквы, _ и цифры.";
+                            }
+                            else
+                            {
+                                error = String.Empty;
+                                if (Login.Length < 4 || Login.Length > 20)
+                                {
+                                    error = "Введите логин от 4 до 20 символов!";
+                                }
+                                else
+                                {
+                                    error = String.Empty;
+                                }
+                            }
                         }
-                        else
-                            error = String.Empty;
                         break;
                     //---------------------------------------------------------
                     case "Email":
@@ -208,13 +212,15 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                             error = "Введите Email!";
                         }
                         else
-                            error = String.Empty;
-                        if (!isValidEmail(Email))
                         {
-                            error = "Введите корректный адрес эл. почты!";
-                        }
-                        else
                             error = String.Empty;
+                            if (!isValidEmail(Email))
+                            {
+                                error = "Введите корректный адрес эл. почты!";
+                            }
+                            else
+                                error = String.Empty;
+                        }
                         break;
                     //---------------------------------------------------------
                     case "Password":
@@ -564,9 +570,16 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             return isMatch.Success;
         }
 
-        public static bool IsValidString(string password) //Для имени, фамилии и т. д.
+        public static bool IsValidString(string password) //Для имени, фамилии и отчества
         {
             string pattern = @"^[A-z | А-я]*$";
+            Match isMatch = Regex.Match(password, pattern, RegexOptions.IgnoreCase);
+            return isMatch.Success;
+        }
+
+        public static bool IsValidLogin(string password) //Для логина
+        {
+            string pattern = @"^[A-z | А-я | \w | _]+[A-z | А-я | \w | _]*$";
             Match isMatch = Regex.Match(password, pattern, RegexOptions.IgnoreCase);
             return isMatch.Success;
         }
