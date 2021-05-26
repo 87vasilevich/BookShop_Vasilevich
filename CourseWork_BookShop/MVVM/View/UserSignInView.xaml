@@ -14,7 +14,7 @@
                 <DropShadowEffect BlurRadius="30" Color="#757575" ShadowDepth="0"></DropShadowEffect>
             </Border.Effect>
             <StackPanel>
-                <TextBlock Text="Пользователь" FontSize="40" FontWeight="Bold" Margin="0 0 0 20" FontFamily="Verdana"/>
+                <TextBlock Text="Книжный мир" FontSize="40" FontWeight="Bold" Margin="0 0 0 20" FontFamily="Verdana"/>
 
                 <Grid Margin="0 0 0 20">
                     <Button HorizontalAlignment="Left" Content="Регистрация" FontSize="20"  Style="{StaticResource MaterialDesignFlatButton}"  Foreground="#FFFF5252" FontFamily="Verdana" Command="{Binding Go_to_sign_up}"></Button>

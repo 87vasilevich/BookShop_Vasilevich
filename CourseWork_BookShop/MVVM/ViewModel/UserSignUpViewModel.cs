@@ -187,9 +187,9 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         else
                         {
                             error = String.Empty;
-                            if (!IsValidLogin(Login))
+                            if (!IsValidLogin(Login) || Login.Contains(" "))
                             {
-                                error = "Некорректный логин! Разрешено: буквы, _ и цифры.";
+                                error = "Некорректный логин! Разрешено: буквы и цифры.";
                             }
                             else
                             {
@@ -342,7 +342,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         else
                         {
                             error = String.Empty;
-                            if (!IsValidString(Name))
+                            if (!IsValidString(Name) || Name.Contains(" "))
                             {
                                 error = "Введите корректное имя!";
                             }
@@ -369,7 +369,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         else
                         {
                             error = String.Empty;
-                            if (!IsValidString(Surname))
+                            if (!IsValidString(Surname) || Surname.Contains(" "))
                             {
                                 error = "Введите корректное имя!";
                             }
@@ -396,7 +396,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         else
                         {
                             error = String.Empty;
-                            if (!IsValidString(Otchestvo))
+                            if (!IsValidString(Otchestvo) || Otchestvo.Contains(" "))
                             {
                                 error = "Введите корректное отчество!";
                             }
@@ -423,7 +423,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         else
                         {
                             error = String.Empty;
-                            if (!IsValidAdressName(City))
+                            if (!IsValidAdressName(City) || City.StartsWith(" "))
                             {
                                 error = "Введите корректный город!";
                             }
@@ -450,7 +450,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         else
                         {
                             error = String.Empty;
-                            if (!IsValidAdressName(Street))
+                            if (!IsValidAdressName(Street) || Street.StartsWith(" "))
                             {
                                 error = "Введите корректную улицу!";
                             }
@@ -577,17 +577,18 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             return isMatch.Success;
         }
 
-        public static bool IsValidLogin(string password) //Для логина
+        public static bool IsValidLogin(string name) //Для логина
         {
-            string pattern = @"^[A-z | А-я | \w | _]+[A-z | А-я | \w | _]*$";
-            Match isMatch = Regex.Match(password, pattern, RegexOptions.IgnoreCase);
+            //string pattern = @"^[A-z | А-я | \d ]+[A-z | А-я | \d ]*$";
+            string pattern = @"^\w+$";
+            Match isMatch = Regex.Match(name, pattern, RegexOptions.IgnoreCase);
             return isMatch.Success;
         }
 
-        public static bool IsValidAdressName(string password) //Для городов, улиц
+        public static bool IsValidAdressName(string name) //Для городов, улиц
         {
             string pattern = @"^[A-z | А-я]+[\s|-]*[A-z | А-я]*[\s|-]*[A-z | А-я]*$";
-            Match isMatch = Regex.Match(password, pattern, RegexOptions.IgnoreCase);
+            Match isMatch = Regex.Match(name, pattern, RegexOptions.IgnoreCase);
             return isMatch.Success;
         }
         #endregion
