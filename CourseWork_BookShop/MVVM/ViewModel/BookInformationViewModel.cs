@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Text.RegularExpressions;
+using System.ComponentModel;
 
 namespace CourseWork_BookShop.MVVM.ViewModel
 {
@@ -112,6 +114,69 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
         #endregion
 
+        #region Валидация
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+                switch (columnName)
+                {
+                    //---------------------------------------------------------
+                    case "BAmount":
+                        if (BAmount.Length == 0)
+                        {
+                            error = String.Empty;
+                        }
+                        else
+                        {
+                            error = String.Empty;
+                            if (!IsValidNumber(BAmount))
+                            {
+                                error = "Некорректное число!";
+                            }
+                            else
+                            {
+                                error = String.Empty;
+                                if (Convert.ToInt32(BAmount) <= 0)
+                                {
+                                    error = "Введите натруальное число!";
+                                }
+                                else
+                                    error = String.Empty;
+                            }
+                        }
+                        break;
+                }
+
+                return error;
+            }
+        }
+
+        static readonly string[] ValidatedProperties = { "BAmount" };
+        public bool IsValid
+        {
+            get
+            {
+                foreach (string property in ValidatedProperties)
+                {
+                    if (this[property] != String.Empty)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+        #endregion
+
         public Books SelectedBook { get; set; }
         public void SetBook(Books selectedBook)
         {
@@ -137,26 +202,40 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
             AddToBasket = new RelayCommand(o =>
             {
-                if((Convert.ToInt32(BAmount) <= Convert.ToInt32(TotalAmount)) && BAmount!="" && BAmount!=null && (Convert.ToInt32(BAmount)>0))
-                { 
-                    CurrentBook.BookAmount = (Convert.ToInt32(TotalAmount) - Convert.ToInt32(BAmount)); //изменяем кол-во на складе
-                    book_db.Update(CurrentBook); //обновляем бд
-                    book_db.Save();
+                if (IsValid)
+                {
+                    if ((Convert.ToInt32(BAmount) <= Convert.ToInt32(TotalAmount)) && BAmount != "" && BAmount != null)
+                    {
+                        CurrentBook.BookAmount = (Convert.ToInt32(TotalAmount) - Convert.ToInt32(BAmount)); //изменяем кол-во на складе
+                        book_db.Update(CurrentBook); //обновляем бд
+                        book_db.Save();
 
-                    BasketTotalSum = Convert.ToDouble(Convert.ToDouble(BAmount) * CurrentBook.BookPrice_Single);
-                    basket_db.Create(new Basket(_userID, BookID, Convert.ToInt32(BAmount), BasketTotalSum, AName, ASurname, BName)); //добавляем в корзину
-                    basket_db.Save();
+                        BasketTotalSum = Convert.ToDouble(Convert.ToDouble(BAmount) * CurrentBook.BookPrice_Single);
+                        basket_db.Create(new Basket(_userID, BookID, Convert.ToInt32(BAmount), BasketTotalSum, AName, ASurname, BName)); //добавляем в корзину
+                        basket_db.Save();
 
-                    MessageBox.Show("Добавлено в корзину!");
+                        MessageBox.Show("Добавлено в корзину!", "Корзина");
 
-                    BAmount = "";
-                    CurrentBook = book_db.GetElement(BookID); //для обновления
+                        BAmount = "";
+                        CurrentBook = book_db.GetElement(BookID); //для обновления
+                    }
+                    else
+                    {
+                        MessageBox.Show("Введите корректные данные!", "Добавление в корзину");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Введите корректные данные!");
+                    MessageBox.Show("Введите корректные данные!", "Добавление в корзину");
                 }
             });
+        }
+
+        public static bool IsValidNumber(string password) //Для целого числа
+        {
+            string pattern = @"^[1-9]+[0-9]*[0-9]*$";
+            Match isMatch = Regex.Match(password, pattern, RegexOptions.IgnoreCase);
+            return isMatch.Success;
         }
     }
 }

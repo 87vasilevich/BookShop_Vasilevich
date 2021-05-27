@@ -17,7 +17,7 @@
         <TextBlock Grid.Row="0" FontSize="30" FontFamily="Verdana" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top">Корзина</TextBlock>
         <TextBlock Text="{Binding IsBasketEmpty}" Grid.Row="0" Margin="0 35 0 0" FontSize="15" FontFamily="Verdana" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
 
-        <ListBox ItemsSource="{Binding AllfromBasket}" Height="500" Width="804.8"
+        <ListBox ItemsSource="{Binding AllfromBasket}" Height="450" Width="804.8"
             HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -72,10 +72,19 @@
 
         <Button Command="{Binding DeleteFromBasket}" Margin="146 0 0 22" Grid.Row="1"  Height="32" Width="230" Content="Очистить корзину" FontSize="20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" VerticalAlignment="Bottom" ></Button>
 
-        <TextBlock Margin="0 0 374 70" Grid.Row="1" FontSize="20" FontFamily="Verdana" VerticalAlignment="Bottom" HorizontalAlignment="Right">Сумма заказа:</TextBlock>
-        <TextBlock Text="{Binding FinalSum}" Margin="0 0 220 70" Grid.Row="1" FontSize="20" FontFamily="Verdana" VerticalAlignment="Bottom" HorizontalAlignment="Right"></TextBlock>
-        <TextBlock Margin="0 0 200 70" Grid.Row="1" FontSize="20" FontFamily="Verdana" VerticalAlignment="Bottom" HorizontalAlignment="Right">$</TextBlock>
+        <TextBlock Margin="0 0 374 140" Grid.Row="1" FontSize="20" FontFamily="Verdana" VerticalAlignment="Bottom" HorizontalAlignment="Right">Сумма заказа:</TextBlock>
+        <TextBlock Text="{Binding FinalSum}" Margin="0 0 220 140" Grid.Row="1" FontSize="20" FontFamily="Verdana" VerticalAlignment="Bottom" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock Margin="0 0 200 140" Grid.Row="1" FontSize="20" FontFamily="Verdana" VerticalAlignment="Bottom" HorizontalAlignment="Right">$</TextBlock>
 
+        <TextBlock Margin="0,0,359.8,103.8" Grid.Row="1" FontSize="20" FontFamily="Verdana" VerticalAlignment="Bottom" HorizontalAlignment="Right">Способ оплаты при получении:</TextBlock>
+        <ComboBox Grid.Row="1" Width="140" FontSize="20" SelectedItem="{Binding Oplata}"
+        SelectedIndex="0" Margin="0,0,209.8,101.8" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Verdana">
+            <ComboBoxItem
+    Content="карта" />
+            <ComboBoxItem
+    Content="наличные" />
+        </ComboBox>
+        
         <Button Command="{Binding AddOrder}" Margin="0 0 146 22" Grid.Row="1"  Height="32" Width="230" Content="Оформить заказ" FontSize="20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" VerticalAlignment="Bottom" ></Button>
 
     </Grid>

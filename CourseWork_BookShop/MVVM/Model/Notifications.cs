@@ -11,7 +11,7 @@ namespace CourseWork_BookShop.MVVM.Model
         [Key]
         public int NotificationID { get; set; }
 
-        public int? Notification_OrderID { get; set; } // Çהוסü םו order, א user id!
+        public int? Notification_UserID { get; set; }
 
         public string NotificationText { get; set; }
 
@@ -22,7 +22,7 @@ namespace CourseWork_BookShop.MVVM.Model
 
         public Notifications(int _userid, string _text)
         {
-            Notification_OrderID = _userid;
+            Notification_UserID = _userid;
             NotificationText = _text;
         }
     }

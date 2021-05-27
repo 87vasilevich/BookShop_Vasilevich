@@ -21,12 +21,20 @@
         <TextBox Grid.Row="0"
          materialDesign:HintAssist.Hint="Введите название книги"
         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-         VerticalAlignment="Center" Margin="145,24,451.8,140" FontSize="14" FontFamily="Verdana" Height="36"/>
+         VerticalAlignment="Center" Margin="145,24,451.8,140" FontSize="14" FontFamily="Verdana" Height="36">
+            <TextBox.Text>
+                <Binding Path="BookName">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <TextBlock Height="20" Grid.Row="0" FontSize="16" FontFamily="Verdana" TextDecorations="{x:Null}" FontWeight="Bold" Margin="145,68,621.8,112">Дополнительные настройки</TextBlock>
 
-        <ComboBox Grid.Row="0"
-        SelectedItem="1" Margin="145,102,851.8,76" Height="22">
+        <ComboBox Grid.Row="0" Text="{Binding ChoiceGenre}"
+         Margin="145,102,851.8,76" Height="22">
             <ComboBoxItem
     Content="Жанр" />
             <ComboBoxItem
@@ -42,9 +50,18 @@
         <TextBox Grid.Row="0"
   materialDesign:HintAssist.Hint="ФИО автора"
   Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-  VerticalAlignment="Center" FontSize="14" FontFamily="Verdana" Margin="345,88,451.8,76" Height="36"/>
+  VerticalAlignment="Center" FontSize="14" FontFamily="Verdana" Margin="345,88,451.8,76" Height="36">
+            <TextBox.Text>
+                <Binding Path="AuthorFIO">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <Button Grid.Row="0" Height="32" HorizontalAlignment="Left" Content="Найти" FontSize="20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" Click="Button_Click" Margin="145,148,0,20" Width="Auto"></Button>
+        <Button Command="{Binding Search_book}" Grid.Row="0" Height="32" HorizontalAlignment="Left" Content="Найти" FontSize="20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" Margin="145,148,0,20" Width="Auto"></Button>
+        <Button Command="{Binding ResetSearch}" Grid.Row="0" Height="32" HorizontalAlignment="Left" Content="Сбросить все параметры" FontSize="20" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" Margin="345,148,0,20" Width="Auto"></Button>
 
         <ListBox
                      Width="826" Height="489" ItemsSource="{Binding allBooks}" 
@@ -84,8 +101,10 @@
         </ListBox>
 
 
-        <TextBlock Height="20" Grid.Row="0" FontSize="16" FontFamily="Verdana" TextDecorations="{x:Null}" FontWeight="Bold" Margin="802,68,144.8,112" Width="150">Сортировать по</TextBlock>
-        <ComboBox Grid.Row="0" Text="{Binding Choice}" SelectedItem="1"
+        <TextBlock Height="20" Grid.Row="0" FontSize="16" FontFamily="Verdana" TextDecorations="{x:Null}" FontWeight="Bold" Margin="802,49,144.8,131" Width="150">Сортировать</TextBlock>
+        <TextBlock Height="20" Grid.Row="0" FontSize="16" FontFamily="Verdana" TextDecorations="{x:Null}" FontWeight="Bold" Margin="802,68,144.8,112" Width="150">все книги по</TextBlock>
+
+        <ComboBox Grid.Row="0" Text="{Binding Choice}"
              Margin="806,102,144.8,76" Height="22">
             <ComboBoxItem
                 Content="умолчанию"/>

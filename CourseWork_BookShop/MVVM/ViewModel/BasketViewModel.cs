@@ -13,7 +13,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
     {
         #region Оформление заказа
         private IRepository<Orders> order_db = new SQLOrderRepository();
-        private IRepository<Bank_Cards> card_db = new SQLCardRepository();
         private IRepository<Users> users_db = new SQLUserRepository();
         private IRepository<Notifications> notification_db = new SQLNotificationRepository();
 
@@ -27,7 +26,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public string datestart;
         public string dateend;
         public double _finalsum;
-        public Bank_Cards cur_card;
 
         //Переменные для уведомлений
         public string _ntext;
@@ -37,16 +35,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         Random rnd = new Random();
 
         //Свойства
-        public Bank_Cards CurrentCard
-        {
-            get { return cur_card; }
-            set
-            {
-                cur_card = value;
-                OnPropertyChanged();
-            }
-        }
-
         public double FinalSum
         {
             get { return _finalsum; }
@@ -127,7 +115,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             }
         }
 
-        public double OrderTotalSum
+        public double OrderTotalSum //Общая сумма одной строки в таблице Заказы
         {
             get { return ordertotalsum; }
             set
@@ -176,6 +164,18 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public RelayCommand AddOrder { get; set; }
         #endregion
 
+
+        //Свойство для выбора оплаты
+        public string _oplata;
+        public string Oplata
+        {
+            get { return _oplata; }
+            set
+            {
+                _oplata = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand DeleteFromBasket { get; set; }
         
@@ -304,16 +304,10 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                     NotifText += $"Название: {ord.B_Name} --- Количество: {ord.OrderBookAmount}\n";
                 }
                 NotifText += $"Сумма заказа: {FinalSum}$\n";
+                NotifText += $"Способ оплаты при получении: {Oplata}.\n";
                 NotifText += $"Дата оформления заказа: {DateStart}. Дата доставки: {DateEnd}.";
                 notification_db.Create(new Notifications(_userID, NotifText));
                 notification_db.Save();
-
-                //Изменяем баланс карты
-                int temp_cardid = users_db.GetElement(_userID).Bank_Cards.Last().CardID;
-                CurrentCard = card_db.GetElement(temp_cardid);
-                CurrentCard.CardBalance = CurrentCard.CardBalance - FinalSum;
-                card_db.Update(CurrentCard);
-                card_db.Save();
 
                 //очистка корзины
                 foreach (Basket b in AllfromBasket)

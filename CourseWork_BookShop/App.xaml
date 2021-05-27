@@ -34,10 +34,6 @@
                 <view:UserSignInView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:BankCardViewModel}">
-                <view:BankCardView/>
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type viewModel:BasketViewModel}">
                 <view:BasketView/>
             </DataTemplate>

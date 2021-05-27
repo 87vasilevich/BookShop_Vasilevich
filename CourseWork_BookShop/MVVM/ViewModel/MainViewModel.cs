@@ -14,8 +14,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
         public RelayCommand HomeViewCommand { get; set; }
 
-        public RelayCommand BankCardViewCommand { get; set; }
-
         public RelayCommand BasketViewCommand { get; set; }
 
         public RelayCommand NotificationViewCommand { get; set; }
@@ -44,11 +42,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             PersonalCabinetViewCommand = new RelayCommand(o =>
             {
                 CurrentView = new PersonalCabinetViewModel(this, _userID);
-            });
-
-            BankCardViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = new BankCardViewModel(this, _userID);
             });
 
             BasketViewCommand = new RelayCommand(o =>

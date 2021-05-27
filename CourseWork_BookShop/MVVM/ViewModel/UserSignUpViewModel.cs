@@ -17,7 +17,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
 
         private IRepository<Users> users_db = new SQLUserRepository();
-        private IRepository<Bank_Cards> card_db = new SQLCardRepository();
 
         #region Для создания пользователя
         //Переменные для регистрации
@@ -28,8 +27,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public string _otchestvo = "";
         private string _login = "";
         public string _email = "";
-        public string _card_number = "";
-        public string _balance = "";
         public string _city = "";
         public string _street = "";
         public string _house = "";
@@ -102,26 +99,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             set
             {
                 _email = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Card_number
-        {
-            get { return _card_number; }
-            set
-            {
-                _card_number = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Balance
-        {
-            get { return _balance; }
-            set
-            {
-                _balance = value;
                 OnPropertyChanged();
             }
         }
@@ -265,25 +242,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         }
                         break;
                     //---------------------------------------------------------
-                    case "Card_number":
-                        if (Card_number.Length == 0)
-                        {
-                            error = "Введите номер карты!";
-                        }
-                        else
-                        {
-                            error = String.Empty;
-                            if (!IsValidCard(Card_number))
-                            {
-                                error = "Номер карты - 16 цифр!";
-                            }
-                            else
-                            {
-                                    error = String.Empty;
-                            }
-                        }
-                        break;
-                    //---------------------------------------------------------
                     case "Apartament":
                         if (Apartament == "")
                         {
@@ -423,7 +381,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         else
                         {
                             error = String.Empty;
-                            if (!IsValidAdressName(City) || City.StartsWith(" "))
+                            if (!IsValidAdressName(City) || City.StartsWith(" ") || City.EndsWith(" "))
                             {
                                 error = "Введите корректный город!";
                             }
@@ -450,7 +408,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                         else
                         {
                             error = String.Empty;
-                            if (!IsValidAdressName(Street) || Street.StartsWith(" "))
+                            if (!IsValidAdressName(Street) || Street.StartsWith(" ") || City.EndsWith(" "))
                             {
                                 error = "Введите корректную улицу!";
                             }
@@ -475,7 +433,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         }
 
         static readonly string[] ValidatedProperties = { "Login", "Email", "Password", "Password_сhek", "Name", "Surname", "Otchestvo", "House",
-        "Apartament", "City", "Street", "Card_number"};
+        "Apartament", "City", "Street"};
         public bool IsValid
         {
             get
@@ -521,20 +479,12 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                     users_db.Create(new Users(Password, Name, Surname, Otchestvo, City, Street, Convert.ToInt32(House), Convert.ToInt32(Apartament), Login, Email));
                     users_db.Save();
 
-                    //Добавление банковской карты
-                    Random rnd = new Random();
-                    Balance = (rnd.Next(1000000, 3000000)).ToString(); //Рандомный баланс
-
-                    int tempID = users_db.GetDataList().Where(x => x.UserLogin == Login).ToList().Last().UserID;
-                    card_db.Create(new Bank_Cards(tempID, Card_number, Convert.ToDouble(Balance)));
-                    card_db.Save();
-
                     //Открытие окна для входа
                     window_main_sign.CurrentView = new UserSignInViewModel(window_main_sign);
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("Неккоректные данные!");
+                    System.Windows.MessageBox.Show("Неккоректные данные!", "Регистрация");
                 }
                 
             });
@@ -552,13 +502,6 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         public static bool IsValidPassword(string password) //Проверка на пароль
         {
             string pattern = @"^\S+\S*$";
-            Match isMatch = Regex.Match(password, pattern, RegexOptions.IgnoreCase);
-            return isMatch.Success;
-        }
-
-        public static bool IsValidCard(string password) //Проверка банк. карты
-        {
-            string pattern = @"^[0-9]{4}[0-9]{4}[0-9]{4}[0-9]{4}$";
             Match isMatch = Regex.Match(password, pattern, RegexOptions.IgnoreCase);
             return isMatch.Success;
         }

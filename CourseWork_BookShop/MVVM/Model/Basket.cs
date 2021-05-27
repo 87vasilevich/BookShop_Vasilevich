@@ -27,11 +27,6 @@ namespace CourseWork_BookShop.MVVM.Model
 
         public virtual Users Users { get; set; }
 
-        public Basket()
-        {
-
-        }
-
         public Basket(int _userID, int _bookID, int _bookamount, double _baskettotalsum, string _aname, string _asurname, string _bname)
         {
             this.Basket_UserID = _userID;
@@ -41,6 +36,10 @@ namespace CourseWork_BookShop.MVVM.Model
             this.A_Name = _aname;
             this.A_Surname = _asurname;
             this.B_Name = _bname;
+        }
+        public Basket()
+        {
+
         }
     }
 }

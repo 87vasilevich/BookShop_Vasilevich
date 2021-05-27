@@ -76,18 +76,10 @@
                     </ListViewItem>
                     <ListViewItem Height="60" Padding="0">
                         <Button Command="{Binding NotificationViewCommand}" Height="60" VerticalAlignment="Center" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <StackPanel Orientation="Horizontal" Width="200">
-                             <materialDesign:PackIcon Kind="Bell" Foreground="#DDFFFFFF" Width="25" Height="25" VerticalAlignment="Center"  Margin="17.5"/>
-                             <TextBlock Text="Уведомления" FontFamily="Verdana" FontSize="13.5" Foreground="White" VerticalAlignment="Center" Margin="10"/>
-                        </StackPanel>
-                        </Button>
-                    </ListViewItem>
-                    <ListViewItem Height="60" Padding="0">
-                        <Button Height="60" VerticalAlignment="Center" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding BankCardViewCommand}">
-                        <StackPanel Orientation="Horizontal" Width="200">
-                            <materialDesign:PackIcon Kind="Cash100" Foreground="#DDFFFFFF" Width="25" Height="25" VerticalAlignment="Center"  Margin="17.5"/>
-                            <TextBlock Text="Банковская карта" FontFamily="Verdana" FontSize="13.5" Foreground="White" VerticalAlignment="Center" Margin="10"/>
-                        </StackPanel>
+                            <StackPanel Orientation="Horizontal" Width="200">
+                                <materialDesign:PackIcon Kind="Cash100" Foreground="#DDFFFFFF" Width="25" Height="25" VerticalAlignment="Center"  Margin="17.5"/>
+                                <TextBlock Text="Мои заказы" FontFamily="Verdana" FontSize="13.5" Foreground="White" VerticalAlignment="Center" Margin="10"/>
+                            </StackPanel>
                         </Button>
                     </ListViewItem>
                     <ListViewItem Height="60" Padding="0">

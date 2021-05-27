@@ -32,7 +32,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
         private ObservableCollection<Notifications> Get_allfromBasket(int temp_userID) //Вывод корзины
         {
-            return new ObservableCollection<Notifications>(notification_db.GetDataList().Where(o => o.Notification_OrderID == temp_userID).ToList());
+            return new ObservableCollection<Notifications>(notification_db.GetDataList().Where(o => o.Notification_UserID == temp_userID).ToList());
         }
     }
 }

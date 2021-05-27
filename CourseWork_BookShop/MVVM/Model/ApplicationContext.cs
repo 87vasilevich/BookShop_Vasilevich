@@ -12,7 +12,6 @@ namespace CourseWork_BookShop.MVVM.Model
         {
         }
 
-        public virtual DbSet<Bank_Cards> Bank_Cards { get; set; }
         public virtual DbSet<Basket> Basket { get; set; }
         public virtual DbSet<Books> Books { get; set; }
         public virtual DbSet<Notifications> Notifications { get; set; }
@@ -21,11 +20,6 @@ namespace CourseWork_BookShop.MVVM.Model
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Users>()
-                .HasMany(e => e.Bank_Cards)
-                .WithOptional(e => e.Users)
-                .HasForeignKey(e => e.Card_UserID);
-
             modelBuilder.Entity<Users>()
                 .HasMany(e => e.Basket)
                 .WithOptional(e => e.Users)

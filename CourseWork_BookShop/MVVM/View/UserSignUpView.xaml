@@ -107,16 +107,16 @@
                 </Grid>
 
                 <Grid>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите номер банковской карты" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300">
+                    <TextBox materialDesign:HintAssist.Hint="Введите номер вашего дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300">
                         <TextBox.Text>
-                            <Binding Path="Card_number">
+                            <Binding Path="House">
                                 <Binding.ValidationRules>
                                     <DataErrorValidationRule/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите название вашей улицы" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300">
+                    <TextBox materialDesign:HintAssist.Hint="Ведите название вашей улицы" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Left" Width="300">
                         <TextBox.Text>
                             <Binding Path="Street">
                                 <Binding.ValidationRules>
@@ -137,15 +137,7 @@
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox materialDesign:HintAssist.Hint="Введите номер вашего дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" HorizontalAlignment="Right" Width="300">
-                        <TextBox.Text>
-                            <Binding Path="House">
-                                <Binding.ValidationRules>
-                                    <DataErrorValidationRule/>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                    
                 </Grid>
 
 

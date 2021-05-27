@@ -3,13 +3,16 @@ using CourseWork_BookShop.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CourseWork_BookShop.MVVM.ViewModel
 {
-    class HomeViewModel : ObservableObject
+    class HomeViewModel : ObservableObject, IDataErrorInfo
     {
         #region Для поиска
         //Для выбора жанра
@@ -25,7 +28,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         }
 
         //Для названия книги
-        public string _bookn;
+        public string _bookn="";
         public string BookName
         {
             get { return _bookn; }
@@ -37,7 +40,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         }
 
         //Для ФИО автора
-        public string _afio;
+        public string _afio="";
         public string AuthorFIO
         {
             get { return _afio; }
@@ -50,6 +53,8 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
         //Команда
         public RelayCommand Search_book { get; set; }
+
+        public RelayCommand ResetSearch { get; set; }
         #endregion
 
         #region Для BookInformation
@@ -78,6 +83,99 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             {
                 _selectedBook = value;
                 OnBookSelected(value);
+            }
+        }
+        #endregion
+
+        #region Валидация
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+                switch (columnName)
+                {
+                    //---------------------------------------------------------
+                    case "BookName":
+                        if (BookName.Length == 0)
+                        {
+                            error = String.Empty;
+                        }
+                        else
+                        {
+                            error = String.Empty;
+                            if (!IsValidBookName(BookName) )
+                            {
+                                error = "Введите корректное название!";
+                            }
+                            else
+                            {
+                                error = String.Empty;
+                                if (BookName.Length < 2 || BookName.Length > 50)
+                                {
+                                    error = "Введите название от 2 до 50 символов!";
+                                }
+                                else
+                                {
+                                    error = String.Empty;
+                                }
+                            }
+                        }
+                        break;
+                    //---------------------------------------------------------
+                    case "AuthorFIO":
+                        if (AuthorFIO.Length == 0)
+                        {
+                            error = String.Empty;
+                        }
+                        else
+                        {
+                            error = String.Empty;
+                            if (!IsValidFioName(AuthorFIO) )
+                            {
+                                error = "Введите корректное ФИО!";
+                            }
+                            else
+                            {
+                                error = String.Empty;
+                                if (AuthorFIO.Length < 2 || AuthorFIO.Length > 50)
+                                {
+                                    error = "Введите ФИО от 2 до 50 символов!";
+                                }
+                                else
+                                {
+                                    error = String.Empty;
+                                }
+                            }
+                        }
+                        break;
+                    //---------------------------------------------------------
+                }
+
+                return error;
+            }
+        }
+
+        static readonly string[] ValidatedProperties = { "BookName", "AuthorFIO" };
+        public bool IsValid
+        {
+            get
+            {
+                foreach (string property in ValidatedProperties)
+                {
+                    if (this[property] != String.Empty)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
         #endregion
@@ -112,6 +210,9 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
         public HomeViewModel(MainViewModel mainVM, int _userID) //Конструктор
         {
+            ChoiceGenre = "Жанр";
+            Choice = "умолчанию";
+
             this.mainVM = mainVM;
             AllBooks = Get_allBooks();
             t_userID = _userID;
@@ -150,17 +251,114 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                 }
             });
 
-            //Search_book = new RelayCommand(o =>
-            //{
-            //    if((BookName != "") && (BookName != null))
-            //    {
-            //        if(ChoiceGenre == "")
-            //    }
-            //});
+            Search_book = new RelayCommand(o =>
+            {
+                if (IsValid)
+                {
+                    //=====================Все поля заполнены
+                    if((BookName != "") && (AuthorFIO != "") && (ChoiceGenre != "Жанр"))
+                    {
+                        BookName = BookName.Trim();
+                        string[] tempBName = BookName.Split(' ');
+
+                        AuthorFIO = AuthorFIO.Trim();
+                        string[] tempAFIO = AuthorFIO.Split(' ');
+                        AllBooks = new ObservableCollection<Books>(db.GetDataList().Where(b => b.BookGenre.ToLower() == ChoiceGenre.ToLower() && SearchName(tempBName, b) && SearchFIO(tempAFIO, b)).ToList());
+                        if (AllBooks.Count == 0)
+                        {
+                            MessageBox.Show("Нет ни одного результата по вашему запросу!", "Поиск");
+                            AllBooks = Get_allBooks();
+                        }
+                    }
+                    else
+                    {
+                        //=====================Только название и ФИО
+                        if ((BookName != "") && (AuthorFIO != ""))
+                        {
+                            BookName = BookName.Trim();
+                            string[] tempBName = BookName.Split(' ');
+
+                            AuthorFIO = AuthorFIO.Trim();
+                            string[] tempAFIO = AuthorFIO.Split(' ');
+                            AllBooks = new ObservableCollection<Books>(db.GetDataList().Where(b => SearchName(tempBName, b) && SearchFIO(tempAFIO, b)).ToList());
+                            if (AllBooks.Count == 0)
+                            {
+                                MessageBox.Show("Нет ни одного результата по вашему запросу!", "Поиск");
+                                AllBooks = Get_allBooks();
+                            }
+                        }
+                        else
+                        {
+                            //=====================Только название и жанр
+                            if ((BookName != "") && (ChoiceGenre != "Жанр"))
+                            {
+                                BookName = BookName.Trim();
+                                string[] tempBName = BookName.Split(' ');
+
+
+                                AllBooks = new ObservableCollection<Books>(db.GetDataList().Where(b => b.BookGenre.ToLower() == ChoiceGenre.ToLower() && SearchName(tempBName, b)).ToList());
+                                if (AllBooks.Count == 0)
+                                {
+                                    MessageBox.Show("Нет ни одного результата по вашему запросу!", "Поиск");
+                                    AllBooks = Get_allBooks();
+                                }
+                            }
+                            else
+                            {
+                                //=====================Только название
+                                if (BookName != "")
+                                {
+                                    BookName = BookName.Trim();
+                                    string[] tempBName = BookName.Split(' ');
+
+                                    AllBooks = new ObservableCollection<Books>(db.GetDataList().Where(b => SearchName(tempBName, b)).ToList());
+                                    if (AllBooks.Count == 0)
+                                    {
+                                        MessageBox.Show("Нет ни одного результата по вашему запросу!", "Поиск");
+                                        AllBooks = Get_allBooks();
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Строка поиска по названию книги пуста!", "Поиск");
+                                    AllBooks = Get_allBooks();
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Неккоректные данные!", "Поиск");
+                }
+            });
+
+            ResetSearch = new RelayCommand(o => {
+
+                AllBooks = Get_allBooks();
+                ChoiceGenre = "Жанр";
+                Choice = "умолчанию";
+                BookName = "";
+                AuthorFIO = "";
+            });
         }
 
         #region Методы
-        private ObservableCollection<Books> Get_allBooks() //Вывод всех книг
+        public static bool IsValidBookName(string name) //Для названия книги
+        {
+            string pattern = @"^[A-z | А-я]+[\s|-]*[A-z | А-я]*[\s|-]*[A-z | А-я]*$";
+            Match isMatch = Regex.Match(name, pattern, RegexOptions.IgnoreCase);
+            return isMatch.Success;
+        }
+
+        public static bool IsValidFioName(string name) //Для фио
+        {
+            string pattern = @"^[A-z | А-я]+[\s|-]*[A-z | А-я]*[\s|-]*[A-z | А-я]*$";
+            Match isMatch = Regex.Match(name, pattern, RegexOptions.IgnoreCase);
+            return isMatch.Success;
+        }
+
+        private ObservableCollection<Books> Get_allBooks() //Вывод всех книг ВНАЧАЛЕ
         {
             return new ObservableCollection<Books>(db.GetDataList().ToList());
         }
@@ -193,6 +391,44 @@ namespace CourseWork_BookShop.MVVM.ViewModel
         private ObservableCollection<Books> Sort_Books_ByAuthor_desc() //Сортировка по жанру (desc)
         {
             return new ObservableCollection<Books>(db.GetDataList().OrderByDescending(Book => Book.AuthorSurame).ThenBy(Book => Book.AuthorName).ToList());
+        }
+
+        private bool SearchName(string[] _tempBName, Books _b)
+        {
+            string temp_SearchName;
+            foreach(string s in _tempBName)
+            {
+                temp_SearchName = s.ToLower();
+                if(!_b.BookName.ToLower().Contains(temp_SearchName))
+                {
+                    return false;
+                } 
+            }
+            return true;
+        }
+
+        private bool SearchFIO(string[] _tempAFIO, Books _b)
+        {
+            string temp_SearchFIO;
+            if (_b.AuthorOtchestevo == null)
+            {
+                _b.AuthorOtchestevo = "";
+            }
+            foreach (string s in _tempAFIO)
+            {
+                temp_SearchFIO = s.ToLower();
+                if (!_b.AuthorName.ToLower().Contains(temp_SearchFIO))
+                {
+                    if (!_b.AuthorSurame.ToLower().Contains(temp_SearchFIO))
+                    {
+                        if(!_b.AuthorOtchestevo.ToLower().Contains(temp_SearchFIO))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
         #endregion
         //---------------------------------------------------------

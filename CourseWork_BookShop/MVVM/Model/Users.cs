@@ -9,6 +9,37 @@ namespace CourseWork_BookShop.MVVM.Model
     public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Users()
+        {
+            Basket = new HashSet<Basket>();
+            Orders = new HashSet<Orders>();
+        }
+
+        public Users(string _Password, string _Login)
+        {
+            Basket = new HashSet<Basket>();
+            Orders = new HashSet<Orders>();
+
+            this.UserPassword = _Password;
+            this.UserLogin = _Login;
+        }
+
+        public Users(string _Password, string _Name, string _Surname, string _Otchestvo, string _City, string _Street, int _House, int _Apartament, string _Login, string _Email)
+        {
+            Basket = new HashSet<Basket>();
+            Orders = new HashSet<Orders>();
+
+            this.UserPassword = _Password;
+            this.UserName = _Name;
+            this.UserSurname = _Surname;
+            this.UserOtchestvo = _Otchestvo;
+            this.UserCity = _City;
+            this.UserStreet = _Street;
+            this.UserHouse_number = _House;
+            this.UserApartament_number = _Apartament;
+            this.UserLogin = _Login;
+            this.UserEmail = _Email;
+        }
 
         [Key]
         public int UserID { get; set; }
@@ -33,44 +64,6 @@ namespace CourseWork_BookShop.MVVM.Model
         public int? UserHouse_number { get; set; }
 
         public int? UserApartament_number { get; set; }
-
-        public Users()
-        {
-            Bank_Cards = new HashSet<Bank_Cards>();
-            Basket = new HashSet<Basket>();
-            Orders = new HashSet<Orders>();
-        }
-
-        public Users(string _Password, string _Login)
-        {
-            Bank_Cards = new HashSet<Bank_Cards>();
-            Basket = new HashSet<Basket>();
-            Orders = new HashSet<Orders>();
-
-            this.UserPassword = _Password;
-            this.UserLogin = _Login;
-        }
-
-        public Users(string _Password, string _Name, string _Surname, string _Otchestvo, string _City, string _Street, int _House, int _Apartament, string _Login, string _Email)
-        {
-            Bank_Cards = new HashSet<Bank_Cards>();
-            Basket = new HashSet<Basket>();
-            Orders = new HashSet<Orders>();
-
-            this.UserPassword = _Password;
-            this.UserName = _Name;
-            this.UserSurname = _Surname;
-            this.UserOtchestvo = _Otchestvo;
-            this.UserCity = _City;
-            this.UserStreet = _Street;
-            this.UserHouse_number = _House;
-            this.UserApartament_number = _Apartament;
-            this.UserLogin = _Login;
-            this.UserEmail = _Email;
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bank_Cards> Bank_Cards { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Basket> Basket { get; set; }
