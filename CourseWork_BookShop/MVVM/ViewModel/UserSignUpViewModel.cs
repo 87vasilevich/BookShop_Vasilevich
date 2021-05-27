@@ -7,6 +7,7 @@ using CourseWork_BookShop.MVVM.Model;
 using CourseWork_BookShop.Core;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace CourseWork_BookShop.MVVM.ViewModel
 {
@@ -478,6 +479,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
                     //Добавление в Users
                     users_db.Create(new Users(Password, Name, Surname, Otchestvo, City, Street, Convert.ToInt32(House), Convert.ToInt32(Apartament), Login, Email));
                     users_db.Save();
+                    MessageBox.Show("Регистрация завершена успешно!", "Регистрация");
 
                     //Открытие окна для входа
                     window_main_sign.CurrentView = new UserSignInViewModel(window_main_sign);
