@@ -27,9 +27,33 @@
         <Border Background="#FF607D8B" Grid.Column="1" Grid.Row="1" Margin="0.2,300.6,507,0" VerticalAlignment="Top" Height="250" CornerRadius="20" HorizontalAlignment="Center" Width="300">
             <StackPanel Grid.Column="1" Grid.Row="1" Width="230" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock FontFamily="Verdana" FontSize="16" Margin="0 0 0 7" Foreground="White">Смена пароля</TextBlock>
-                <TextBox Text="{Binding Password2}" materialDesign:HintAssist.Hint="Ведите старый пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
-                <TextBox Text="{Binding NewPassword}" materialDesign:HintAssist.Hint="Ведите новый пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
-                <TextBox Text="{Binding NewPasswordCheck}" materialDesign:HintAssist.Hint="Повторите новый пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
+                <TextBox materialDesign:HintAssist.Hint="Ведите старый пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                    <TextBox.Text>
+                        <Binding Path="Password2">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox materialDesign:HintAssist.Hint="Ведите новый пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                    <TextBox.Text>
+                        <Binding Path="NewPassword">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox materialDesign:HintAssist.Hint="Повторите новый пароль" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                    <TextBox.Text>
+                        <Binding Path="NewPasswordCheck">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <Button Grid.Row="1" Height="32" Content="Изменить" FontSize="14" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" Width="230" HorizontalAlignment="Center" Margin="1,0,-0.6,0" Command="{Binding ChangePassword}"></Button>
             </StackPanel>
         </Border>
@@ -37,7 +61,15 @@
         <Border Background="#FF607D8B" Grid.Column="1" Grid.Row="1" Margin="0.2,79.6,0,0" VerticalAlignment="Top" Height="166" CornerRadius="20" HorizontalAlignment="Left" Width="300">
             <StackPanel Grid.Column="1" Grid.Row="1" Width="230" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock FontFamily="Verdana" FontSize="16" Margin="0 0 0 7" Foreground="White">Смена логина</TextBlock>
-                <TextBox  materialDesign:HintAssist.Hint="Ведите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4" Text="{Binding Login}"/>
+                <TextBox  materialDesign:HintAssist.Hint="Ведите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                    <TextBox.Text>
+                        <Binding Path="Login">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <Button Command="{Binding ChangeLogin}" Grid.Row="1" Height="32" Content="Изменить" FontSize="14" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" Width="230" HorizontalAlignment="Center" Margin="1,0,-0.6,0"></Button>
             </StackPanel>
         </Border>
@@ -47,14 +79,78 @@
 
                 <StackPanel Width="250" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 0 0">
                     <TextBlock FontFamily="Verdana" FontSize="16" Margin="0 0 0 7" Foreground="White">Персональная информация</TextBlock>
-                    <TextBox materialDesign:HintAssist.Hint="Ведите имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4" Text="{Binding Name}"/>
-                    <TextBox Text="{Binding Surname}" materialDesign:HintAssist.Hint="Ведите фамилию" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
-                    <TextBox Text="{Binding Otchestvo}" materialDesign:HintAssist.Hint="Ведите отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
-                    <TextBox Text="{Binding Email}" materialDesign:HintAssist.Hint="Ведите Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
-                    <TextBox Text="{Binding City}" materialDesign:HintAssist.Hint="Ведите город" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
-                    <TextBox Text="{Binding Street}" materialDesign:HintAssist.Hint="Ведите улицу" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
-                    <TextBox Text="{Binding House}" materialDesign:HintAssist.Hint="Введите № дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
-                    <TextBox Text="{Binding Apartament}" materialDesign:HintAssist.Hint="Введите № квартиры" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4" >
+                        <TextBox.Text>
+                            <Binding Path="Name">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите фамилию" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                        <TextBox.Text>
+                            <Binding Path="Surname">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                        <TextBox.Text>
+                            <Binding Path="Otchestvo">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                        <TextBox.Text>
+                            <Binding Path="Email">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите город" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                        <TextBox.Text>
+                            <Binding Path="City">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox materialDesign:HintAssist.Hint="Ведите улицу" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                        <TextBox.Text>
+                            <Binding Path="Street">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox materialDesign:HintAssist.Hint="Введите № дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                        <TextBox.Text>
+                            <Binding Path="House">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox materialDesign:HintAssist.Hint="Введите № квартиры" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="14" CaretBrush="#FFFF5252" FontFamily="Verdana" Background="White" Margin="0 0 0 4">
+                        <TextBox.Text>
+                            <Binding Path="Apartament">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Button Grid.Row="0" Height="32" Content="Изменить" FontSize="14" Background="#FFFF5252" BorderBrush="#FFFF5252" FontFamily="Verdana" Width="250" HorizontalAlignment="Center" Margin="1,0,-0.6,0" Command="{Binding ChangePersonalInfo}"></Button>
                 </StackPanel>
 
