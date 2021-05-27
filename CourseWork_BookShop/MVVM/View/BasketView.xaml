@@ -77,8 +77,8 @@
         <TextBlock Margin="0 0 200 140" Grid.Row="1" FontSize="20" FontFamily="Verdana" VerticalAlignment="Bottom" HorizontalAlignment="Right">$</TextBlock>
 
         <TextBlock Margin="0,0,359.8,103.8" Grid.Row="1" FontSize="20" FontFamily="Verdana" VerticalAlignment="Bottom" HorizontalAlignment="Right">Способ оплаты при получении:</TextBlock>
-        <ComboBox Grid.Row="1" Width="140" FontSize="20" SelectedItem="{Binding Oplata}"
-        SelectedIndex="0" Margin="0,0,209.8,101.8" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Verdana">
+        <ComboBox Grid.Row="1" Width="140" FontSize="20" Text="{Binding Oplata}"
+         Margin="0,0,209.8,101.8" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Verdana">
             <ComboBoxItem
     Content="карта" />
             <ComboBoxItem
