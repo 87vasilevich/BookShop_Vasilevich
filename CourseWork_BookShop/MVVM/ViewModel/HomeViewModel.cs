@@ -358,7 +358,7 @@ namespace CourseWork_BookShop.MVVM.ViewModel
             return isMatch.Success;
         }
 
-        private ObservableCollection<Books> Get_allBooks() //Вывод всех книг ВНАЧАЛЕ
+        private ObservableCollection<Books> Get_allBooks() //Вывод всех книг 
         {
             return new ObservableCollection<Books>(db.GetDataList().ToList());
         }

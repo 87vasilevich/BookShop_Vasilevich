@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CourseWork_BookShop.MVVM.ViewModel
 {
@@ -56,10 +57,16 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
             ExitViewCommand = new RelayCommand(o =>
             {
-                User_Sign_MainWindow user_Sign_Main = new User_Sign_MainWindow();
-                user_Sign_Main.Show();
+                MessageBoxResult message;
 
-                CloseAction();
+                message = MessageBox.Show("Вы уверены?", "Выход", MessageBoxButton.YesNo);
+                if (message == MessageBoxResult.Yes)
+                {
+                    User_Sign_MainWindow user_Sign_Main = new User_Sign_MainWindow();
+                    user_Sign_Main.Show();
+
+                    CloseAction();
+                }
             });
         }
     }

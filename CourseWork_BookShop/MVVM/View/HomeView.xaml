@@ -44,7 +44,7 @@
             <ComboBoxItem
     Content="Приключения" />
             <ComboBoxItem
-    Content="Windows" />
+    Content="Зарубежные анекдоты" />
         </ComboBox>
 
         <TextBox Grid.Row="0"

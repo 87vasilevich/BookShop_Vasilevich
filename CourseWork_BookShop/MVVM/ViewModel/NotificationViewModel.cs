@@ -27,10 +27,10 @@ namespace CourseWork_BookShop.MVVM.ViewModel
 
         public NotificationViewModel(MainViewModel mainVM, int _userID)
         {
-            AllfromNotifications = Get_allfromBasket(_userID);
+            AllfromNotifications = Get_allfromOrders(_userID);
         }
 
-        private ObservableCollection<Notifications> Get_allfromBasket(int temp_userID) //Вывод корзины
+        private ObservableCollection<Notifications> Get_allfromOrders(int temp_userID) //Вывод корзины
         {
             return new ObservableCollection<Notifications>(notification_db.GetDataList().Where(o => o.Notification_UserID == temp_userID).ToList());
         }
